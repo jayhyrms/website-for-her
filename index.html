@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>For You</title>
+	<style>
+		/* Add some basic styling to make it look nice */
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+			background-color: #ffe6f9; /* Pink background */
+		}
+		.image-container {
+			margin: 20px;
+		}
+		.image {
+			width: 200px; /* adjust the width and height to fit your image */
+			height: 200px;
+		}
+		.button-container {
+			margin: 20px;
+		}
+		.button {
+			background-color: #ffc5c5; /* Pink button background */
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.button:hover {
+			background-color: #ffb6c1; /* Pink button hover background */
+		}
+		/* Add styles for the moving "No" button */
+		.no-button-moving {
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition: top 0.5s, left 0.5s;
+		}
+		/* Add styles for the triggered "Yes" button */
+		.yes-button-triggered {
+			background-color: #ff69b4; /* Bright pink button background */
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>Do you love me?</h1>
+	<div class="image-container">
+		<img src="https://i.pinimg.com/originals/b0/8c/4c/b08c4cbdec27e94837543d9fb7d1fa6a.jpg" alt="Image" class="image">
+	</div>
+	<div class="button-container">
+		<button id="no-button" class="button">No</button>
+		<button id="yes-button" class="button">Yes</button>
+	</div>
+
+	<script>
+		// Get the button elements
+		const noButton = document.getElementById('no-button');
+		const yesButton = document.getElementById('yes-button');
+
+		// Add event listeners to the buttons
+		noButton.addEventListener('click', () => {
+			// When the No button is clicked, move it around the screen
+			noButton.classList.add('no-button-moving');
+			noButton.style.top = `${Math.random() * (window.innerHeight - 50)}px`;
+			noButton.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
+			
+			// Play the "No" sound effect
+			const noSound = new Audio('uncorrect.mp3');
+			noSound.play();
+		});
+
+		yesButton.addEventListener('click', () => {
+  // Play the "Yes" sound effect immediately
+  const yesSound = new Audio('correct.mp3');
+  yesSound.play();
+
+  // Then, display the alert box
+  setTimeout(() => {
+    alert('yayyyy, love u too ><');
+    // Add the triggered class to the Yes button
+    yesButton.classList.add('yes-button-triggered');
+    yesButton.innerHTML = 'Yessss!';
+    
+    // Use setTimeout to remove the triggered class after 2-3 seconds
+    setTimeout(() => {
+      yesButton.classList.remove('yes-button-triggered');
+      yesButton.innerHTML = 'Yes';
+    }, 2500); // 2500ms = 2.5 seconds
+  }, 0); // Tambahkan setTimeout untuk menunda alert
+});
+	</script>
+</body>
+</html>
